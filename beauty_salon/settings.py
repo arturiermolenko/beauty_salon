@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "salon"
 ]
 
 MIDDLEWARE = [
@@ -104,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
                 "password_validation.NumericPasswordValidator",
     },
 ]
-
+AUTH_USER_MODEL = "salon.Worker"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
