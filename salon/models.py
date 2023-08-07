@@ -39,7 +39,7 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.position.name} - {self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Procedure(models.Model):
