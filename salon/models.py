@@ -15,7 +15,7 @@ class ProcedureType(models.Model):
 class Client(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    telephone_number = models.IntegerField()
+    telephone_number = models.CharField(max_length=255)
 
     class Meta:
         ordering = ["last_name"]
@@ -39,7 +39,7 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.position} - {self.first_name} {self.last_name}"
 
 
 class Procedure(models.Model):
