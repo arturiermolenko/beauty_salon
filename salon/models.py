@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class ProcedureType(models.Model):
@@ -40,6 +41,9 @@ class Worker(AbstractUser):
 
     def __str__(self):
         return f"{self.position} - {self.first_name} {self.last_name}"
+
+    def get_absolute_url(self):
+        return reverse("salon:worker-detail", kwargs={"pk":self.pk})
 
 
 class Procedure(models.Model):

@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from salon.forms import (
     ProcedureSearchForm,
-    ClientSearchForm, ClientForm
+    ClientSearchForm, ClientForm, WorkerSearchForm, WorkerCreationForm
 )
 from salon.models import Client, Worker, Procedure
 
@@ -61,11 +61,6 @@ class ProcedureListView(LoginRequiredMixin, generic.ListView):
 class ProcedureCreateView(LoginRequiredMixin, generic.CreateView):
     model = Procedure
     fields = "__all__"
-    success_url = reverse_lazy("salon:procedure-list")
-
-
-class ProcedureDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Procedure
     success_url = reverse_lazy("salon:procedure-list")
 
 
@@ -129,24 +124,45 @@ class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
-    pass
+    model = Worker
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = WorkerSearchForm(
+            initial={"username": username}
+        )
+
+        return context
+
+    def get_queryset(self):
+        queryset = Worker.objects.all()
+        form = WorkerSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
 
 
 class WorkerCreateView(LoginRequiredMixin, generic.CreateView):
-    pass
+    model = Worker
+    form_class = WorkerCreationForm
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
-    pass
+    model = Worker
+    queryset = Worker.objects.prefetch_related("procedures__workers")
 
 
 class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
-    pass
+    model = Worker
+    form_class = WorkerCreationForm
 
 
 class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
-    pass
-
-
-class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
-    pass
+    model = Worker
+    success_url = reverse_lazy("")

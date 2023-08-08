@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1>
+    Client list
+    <a href="{% url 'salon:client-create' %}" class="btn btn-primary link-to-page">
+      Add client
+    </a>
+  </h1>
+  
+  {% block form %}
+    {% include "includes/search_form.html" %}
+  {% endblock %}
+  
+  {% if client_list %}
+    <ul>
+      {% for client in client_list %}
+        <li>
+          <a href="{% url "salon:client-detail" pk=client.id %} ">{{ client.id }}</a>
+          {{ client.first_name }} {{ client.last_name }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no clients in taxi</p>
+  {% endif %}
+{% endblock %}

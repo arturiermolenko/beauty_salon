@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Beauty salon Home</h1>
+    <h2>Dynamic content</h2>
+    <p>The Beauty salon has the following record counts:</p>
+    <ul>
+        <li><strong>Clients:</strong> {{ num_clients }}</li>
+        <li><strong>Workers:</strong> {{ num_workers }}</li>
+        <li><strong>Procedures:</strong> {{ num_procedures }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
