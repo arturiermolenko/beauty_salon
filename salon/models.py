@@ -49,7 +49,6 @@ class Worker(AbstractUser):
 class Procedure(models.Model):
     procedure_type = models.ForeignKey(ProcedureType, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    additional_info = models.TextField(max_length=500, blank=True)
     date_time = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
     workers = models.ManyToManyField(
