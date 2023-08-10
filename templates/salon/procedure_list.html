@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
+  <h1 style="padding-top: 90px; text-align: center">
     Procedure List
-    <a href="{% url 'salon:procedure-list' %}" class="btn btn-primary link-to-page">
-      Create procedure
+    <a href="{% url 'salon:procedure-create' %}" class="btn btn-outline-dark link-to-page">
+      Create
     </a>
   </h1>
 
@@ -15,56 +15,59 @@
 
   {% if procedure_list %}
     <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Procedure type</th>
-        <th>Client</th>
-        <th>Additional info</th>
-        <th>Date and time</th>
-        <th>Completed</th>
-        <th>Workers</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
-      {% for procedure in procedure_list %}
+      <thead class="thead-dark">
         <tr>
-          <td>
-              {{ procedure.id }}
-          </td>
-          <td>
-              {{ procedure.procedure_type }}
-          </td>
-          <td>
-              {{ procedure.client }}
-          </td>
-          <td>
-              {{ procedure.additional_info }}
-          </td>
-          <td>
-              {{ procedure.date_time }}
-          </td>
-          <td>
-              {{ procedure.is_completed }}
-          </td>
-          <td>
-            {% for worker in  procedure.workers.all %}
-              {{ worker }}<br>
-            {% endfor %}
-          </td>
-          <td>
-              <a href="{% url 'salon:procedure-update' pk=procedure.id %}">
-                Update
-              </a>
+          <th scope="col">ID</th>
+          <th scope="col">Procedure type</th>
+          <th scope="col">Client</th>
+          <th scope="col">Additional info</th>
+          <th scope="col">Date and time</th>
+          <th scope="col">Completed</th>
+          <th scope="col">Workers</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for procedure in procedure_list %}
+          <tr>
+            <th>
+                {{ procedure.id }}
+            </th>
+            <td>
+                {{ procedure.procedure_type }}
             </td>
             <td>
-              <a style="color: red"
-                href="{% url 'salon:procedure-delete' pk=procedure.id %}">
-                Delete
-              </a>
+                {{ procedure.client }}
             </td>
-        </tr>
-      {% endfor %}
+            <td>
+                {{ procedure.additional_info }}
+            </td>
+            <td>
+                {{ procedure.date_time }}
+            </td>
+            <td>
+                {{ procedure.is_completed }}
+            </td>
+            <td>
+              {% for worker in  procedure.workers.all %}
+                {{ worker }}<br>
+              {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'salon:procedure-update' pk=procedure.id %}">
+                  Update
+                </a>
+              </td>
+              <td>
+                <a style="color: red"
+                  href="{% url 'salon:procedure-delete' pk=procedure.id %}">
+                  Delete
+                </a>
+              </td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
 
   {% else %}

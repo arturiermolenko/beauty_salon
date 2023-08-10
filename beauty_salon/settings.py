@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "debug_toolbar",
+    "crispy_forms",
+    "crispy_bootstrap4",
 
     "salon"
 ]
@@ -109,6 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
                 "password_validation.NumericPasswordValidator",
     },
 ]
+RISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 AUTH_USER_MODEL = "salon.Worker"
 
 LOGIN_REDIRECT_URL = "/"

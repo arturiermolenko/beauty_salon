@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
   {% block title %}<title>Beauty salon</title>{% endblock %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+  <!-- Nucleo Icons -->
+  <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'css/soft-design-system.css' %}" rel="stylesheet" />
+
 </head>
 
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
+<body {% block body %}{% endblock body %} >
+  {% block header %}
 
-            {% block sidebar %}
-                {% include "includes/sidebar.html" %}
-            {% endblock %}
+    {% include 'includes/navigation.html' %}
 
-        </div>
-        <div class="col-sm-10 ">
+  {% endblock header %}
 
-            {% block content %}{% endblock %}
+  {% block content %}{% endblock content %}
 
-            {% block pagination %}
-                {% include "includes/pagination.html" %}
-            {% endblock %}
+  {% block footer %}
 
-        </div>
-    </div>
-</div>
+    {% include 'includes/footer.html' %}
+
+  {% endblock footer %}
+
+  {% include 'includes/scripts.html' %}
+
+  {% block javascripts %}{% endblock javascripts %}
 </body>
 </html>
