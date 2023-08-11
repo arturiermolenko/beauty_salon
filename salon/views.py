@@ -5,7 +5,11 @@ from django.shortcuts import render
 
 from salon.forms import (
     ProcedureSearchForm,
-    ClientSearchForm, ClientForm, WorkerSearchForm, WorkerCreationForm
+    ClientSearchForm,
+    WorkerSearchForm,
+    WorkerCreationForm,
+    ClientCreateForm,
+    ClientUpdateForm
 )
 from salon.models import Client, Worker, Procedure
 
@@ -104,7 +108,7 @@ class ClientListView(LoginRequiredMixin, generic.ListView):
 
 class ClientCreateView(LoginRequiredMixin, generic.CreateView):
     model = Client
-    form_class = ClientForm
+    form_class = ClientCreateForm
     success_url = reverse_lazy("salon:client-list")
 
 
@@ -114,7 +118,7 @@ class ClientDetailView(LoginRequiredMixin, generic.DetailView):
 
 class ClientUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Client
-    form_class = ClientForm
+    form_class = ClientUpdateForm
     success_url = reverse_lazy("salon:client-list")
 
 

@@ -22277,6 +22277,7 @@ hr.horizontal.gray-light {
 }
 
 html {
+  padding: 10px;
   border: none !important;
 }
 
@@ -24662,6 +24663,7 @@ html * {
 }
 
 body {
+  background: rgba(248, 131, 121, 0.05);
   font-weight: 400;
   line-height: 1.6;
 }

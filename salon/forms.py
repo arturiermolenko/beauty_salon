@@ -4,10 +4,16 @@ from django.contrib.auth.forms import UserCreationForm
 from salon.models import Client, Worker
 
 
-class ClientForm(forms.ModelForm):
+class ClientUpdateForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ("telephone_number",)
+
+
+class ClientCreateForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = "__all__"
 
 
 class WorkerCreationForm(UserCreationForm):

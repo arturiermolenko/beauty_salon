@@ -14,13 +14,12 @@
   <br>
 
   {% if procedure_list %}
-    <table class="table">
-      <thead class="thead-dark">
+    <table class="table table-group-divider" style="text-align: center">
+      <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Procedure type</th>
           <th scope="col">Client</th>
-          <th scope="col">Additional info</th>
           <th scope="col">Date and time</th>
           <th scope="col">Completed</th>
           <th scope="col">Workers</th>
@@ -38,20 +37,21 @@
                 {{ procedure.procedure_type }}
             </td>
             <td>
-                {{ procedure.client }}
-            </td>
-            <td>
-                {{ procedure.additional_info }}
+                {{ procedure.client.first_name }} {{ procedure.client.last_name }}
             </td>
             <td>
                 {{ procedure.date_time }}
             </td>
             <td>
-                {{ procedure.is_completed }}
+              {% if procedure.is_completed%}
+                Completed
+              {% else %}
+                Not completed
+              {% endif %}
             </td>
             <td>
               {% for worker in  procedure.workers.all %}
-                {{ worker }}<br>
+                {{ worker.first_name }} {{ worker.last_name }}<br>
               {% endfor %}
             </td>
             <td>

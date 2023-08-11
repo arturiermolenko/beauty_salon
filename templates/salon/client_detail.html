@@ -1,10 +1,12 @@
+{% extends "base.html" %}
+
 {% block content %}
-  <h1>
+  <h1 style="padding-top: 90px; text-align: center">
     Client: {{ client.first_name }} {{ client.last_name }}
-    <a href="{% url 'salon:client-delete' pk=client.pk %}" class="btn btn-danger link-to-page">
-      Delete....
+    <a href="{% url 'salon:client-delete' pk=client.pk %}" class="btn btn-outline-danger link-to-page">
+      Delete
     </a>
-    <a href="{% url 'salon:client-update' pk=client.pk %}" class="btn btn-secondary link-to-page">
+    <a href="{% url 'salon:client-update' pk=client.pk %}" class="btn btn-outline-dark link-to-page">
       Update client's telephone number
     </a>
   </h1>
@@ -24,5 +26,6 @@
     {% empty %}
       <p>Client doesn't have any procedures</p>
     {% endfor %}
+  <a href="{% url 'salon:client-list' %}" class="btn btn-outline-dark link-to-page">Back</a>
   </div>
 {% endblock %}
