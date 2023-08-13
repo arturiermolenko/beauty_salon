@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="padding-top: 90px; text-align: center">
+    Client: {{ client.first_name }} {{ client.last_name }}
+    <a href="{% url 'salon:client-delete' pk=client.pk %}" class="btn btn-outline-danger link-to-page">
+      Delete
+    </a>
+    <a href="{% url 'salon:client-update' pk=client.pk %}" class="btn btn-outline-dark link-to-page">
+      Update client's telephone number
+    </a>
+  </h1>
+
+  <p><strong>First name:</strong> {{ client.first_name }}</p>
+  <p><strong>Last name:</strong> {{ client.last_name }}</p>
+  <p><strong>Telephone number:</strong> {{ client.telephone_number }}</p>
+
+  <div class="ml-3">
+    <h4>Client's procedures</h4>
+
+    {% for procedure in client.procedure_set.all%}
+        <hr>
+        <p><strong>Procedure type:</strong> {{ procedure.procedure_type }}</p>
+        <p><strong>Procedure time:</strong> {{ procedure.date_time }}</p>
+
+    {% empty %}
+      <p>Client doesn't have any procedures</p>
+    {% endfor %}
+  <a href="{% url 'salon:client-list' %}" class="btn btn-outline-dark link-to-page">Back</a>
+  </div>
+{% endblock %}

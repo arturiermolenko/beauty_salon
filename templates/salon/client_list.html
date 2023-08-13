@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1 style="padding-top: 90px; text-align: center">
+    Client list
+    <a href="{% url 'salon:client-create' %}" class="btn btn-outline-dark link-to-page">
+      Add client
+    </a>
+  </h1>
+  
+  {% block form %}
+    {% include "includes/search_form.html" %}
+  {% endblock %}
+  
+  {% if client_list %}
+    <table class="table table-group-divider" style="text-align: center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">Telephone number</th>
+          <th>Update telephone number</th>
+          <th>Delete client</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in client_list %}
+          <tr>
+            <th>{{ client.id }}</th>
+            <th><a href="{% url "salon:client-detail" pk=client.id %} ">{{ client.first_name }}</a></th>
+            <th>{{ client.last_name }}</th>
+            <th>{{ client.telephone_number }}</th>
+            <th>
+              <a href="{% url 'salon:client-update' pk=client.id %}">
+                Update
+              </a>
+            </th>
+            <th>
+              <a style="color: red" href="{% url 'salon:client-delete' pk=client.id%}">
+                Delete
+              </a>
+            </th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There are no clients</p>
+  {% endif %}
+{% endblock %}

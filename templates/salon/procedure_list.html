@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="padding-top: 90px; text-align: center">
+    Procedure List
+    <a href="{% url 'salon:procedure-create' %}" class="btn btn-outline-dark link-to-page">
+      Create
+    </a>
+  </h1>
+
+  {% block form %}
+    {% include "includes/search_form.html" %}
+  {% endblock %}
+  <br>
+
+  {% if procedure_list %}
+    <table class="table table-group-divider" style="text-align: center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Procedure type</th>
+          <th scope="col">Client</th>
+          <th scope="col">Date and time</th>
+          <th scope="col">Completed</th>
+          <th scope="col">Workers</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for procedure in procedure_list %}
+          <tr>
+            <th>
+                {{ procedure.id }}
+            </th>
+            <td>
+                {{ procedure.procedure_type }}
+            </td>
+            <td>
+                {{ procedure.client.first_name }} {{ procedure.client.last_name }}
+            </td>
+            <td>
+                {{ procedure.date_time }}
+            </td>
+            <td>
+              {% if procedure.is_completed%}
+                Completed
+              {% else %}
+                Not completed
+              {% endif %}
+            </td>
+            <td>
+              {% for worker in  procedure.workers.all %}
+                {{ worker.first_name }} {{ worker.last_name }}<br>
+              {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'salon:procedure-update' pk=procedure.id %}">
+                  Update
+                </a>
+              </td>
+              <td>
+                <a style="color: red"
+                  href="{% url 'salon:procedure-delete' pk=procedure.id %}">
+                  Delete
+                </a>
+              </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  {% else %}
+      <p>There are no procedures in the service.</p>
+  {% endif %}
+{% endblock %}

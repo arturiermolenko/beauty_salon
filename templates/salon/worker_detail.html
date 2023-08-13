@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="padding-top: 90px; text-align: center">
+    Username: {{ worker.username }}
+    <a href="{% url 'salon:worker-delete' pk=worker.id %}" class="btn btn-outline-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'salon:worker-update' pk=worker.id %}" class="btn btn-outline-dark link-to-page">
+      Update worker
+    </a>
+  </h1>
+
+  <div>
+    <p><strong>First name:</strong> {{ worker.first_name }}</p>
+    <p><strong>Last name:</strong> {{ worker.last_name }}</p>
+    <p><strong>Position:</strong> {{ worker.position }}</p>
+  </div>
+
+  <div class="ml-3">
+    <h4>Procedures:</h4>
+
+    {% for procedure in worker.procedures.all %}
+        <hr>
+        <p><strong>Procedure type:</strong> {{ procedure.procedure_type }}</p>
+        <p><strong>Date and time:</strong> {{ procedure.date_time }}</p>
+
+    {% empty %}
+      <p>No procedures!</p>
+    {% endfor %}
+  </div>
+{% endblock %}
