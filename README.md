@@ -26,6 +26,8 @@ touch .env
 python manage.py migrate
 python manage.py runserver
 ```
+Instead of "touch .env" use, please, command "echo > .env" for Windows.
+Fill .env file in according to .env.sample
 
 
 
