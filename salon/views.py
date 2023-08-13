@@ -52,7 +52,10 @@ class ProcedureListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Procedure.objects.select_related("procedure_type")
+        queryset = (Procedure.objects.
+                    prefetch_related("workers").
+                    select_related("procedure_type").
+                    select_related("client"))
         form = ProcedureSearchForm(self.request.GET)
 
         if form.is_valid():
@@ -144,7 +147,7 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Worker.objects.all()
+        queryset = Worker.objects.select_related("position")
         form = WorkerSearchForm(self.request.GET)
 
         if form.is_valid():
