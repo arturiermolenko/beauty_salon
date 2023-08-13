@@ -43,7 +43,7 @@ class Worker(AbstractUser):
         return f"{self.position} - {self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
-        return reverse("salon:worker-detail", kwargs={"pk":self.pk})
+        return reverse("salon:worker-detail", kwargs={"pk": self.pk})
 
 
 class Procedure(models.Model):

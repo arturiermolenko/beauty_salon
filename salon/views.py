@@ -9,7 +9,8 @@ from salon.forms import (
     WorkerSearchForm,
     WorkerCreationForm,
     ClientCreateForm,
-    ClientUpdateForm
+    ClientUpdateForm,
+    ProcedureForm
 )
 from salon.models import Client, Worker, Procedure
 
@@ -64,13 +65,13 @@ class ProcedureListView(LoginRequiredMixin, generic.ListView):
 
 class ProcedureCreateView(LoginRequiredMixin, generic.CreateView):
     model = Procedure
-    fields = "__all__"
+    form_class = ProcedureForm
     success_url = reverse_lazy("salon:procedure-list")
 
 
 class ProcedureUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Procedure
-    fields = "__all__"
+    form_class = ProcedureForm
     success_url = reverse_lazy("salon:procedure-list")
 
 
