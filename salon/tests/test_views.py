@@ -46,7 +46,10 @@ class PrivateProcedureTests(TestCase):
             Procedure(
                 procedure_type=self.procedure_type,
                 client=self.client__,
-                date_time=datetime(2023, 12, index, 14, 0, tzinfo=zoneinfo.ZoneInfo(key='UTC')),
+                date_time=(
+                    datetime(2023, 12, index, 14, 0,
+                             tzinfo=zoneinfo.ZoneInfo(key="UTC"))
+                ),
                 is_completed=False,
             )
 
@@ -66,8 +69,12 @@ class PrivateProcedureTests(TestCase):
         self.assertTemplateUsed(response_, "salon/procedure_list.html")
 
     def test_get_queryset(self):
-        procedures = Procedure.objects.filter(procedure_type__name__icontains="manicure")
-        response_ = self.client.get(PROCEDURE_LIST_URL + "?procedure_type=manicure")
+        procedures = Procedure.objects.filter(
+            procedure_type__name__icontains="manicure"
+        )
+        response_ = self.client.get(
+            PROCEDURE_LIST_URL + "?procedure_type=manicure"
+        )
 
         self.assertEqual(
             list(response_.context["procedure_list"]),

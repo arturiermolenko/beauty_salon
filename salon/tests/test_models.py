@@ -38,7 +38,10 @@ class ModelTests(TestCase):
         self.procedure = Procedure(
             procedure_type=self.procedure_type,
             client=self.client__,
-            date_time=datetime(2023, 12, 9, 14, 0, tzinfo=zoneinfo.ZoneInfo(key='UTC')),
+            date_time=(
+                datetime(2023, 12, 9, 14, 0,
+                         tzinfo=zoneinfo.ZoneInfo(key="UTC"))
+            ),
             is_completed=False,
         )
 
@@ -64,7 +67,8 @@ class ModelTests(TestCase):
     def test_worker_str(self):
         self.assertEqual(
             str(self.worker),
-            f"{self.worker.position} - {self.worker.first_name} {self.worker.last_name}"
+            f"{self.worker.position} - "
+            f"{self.worker.first_name} {self.worker.last_name}"
         )
 
     def test_procedure_str(self):

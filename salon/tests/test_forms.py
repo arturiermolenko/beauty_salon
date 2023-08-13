@@ -38,11 +38,16 @@ class FormsTests(TestCase):
         )
 
     def test_procedure_form(self):
-        workers_set = get_user_model().objects.filter(username__icontains="test")
+        workers_set = (
+            get_user_model().objects.filter(username__icontains="test")
+        )
         self.procedure_form_data = {
             "procedure_type": self.procedure_type,
             "client": self.client__,
-            "date_time": datetime(2023, 12, 9, 14, 0, tzinfo=zoneinfo.ZoneInfo(key='UTC')),
+            "date_time": (
+                datetime(2023, 12, 9, 14, 0,
+                         tzinfo=zoneinfo.ZoneInfo(key="UTC"))
+            ),
             "is_completed": False,
             "workers": workers_set
         }
@@ -52,14 +57,22 @@ class FormsTests(TestCase):
         self.assertEqual(form.data, self.procedure_form_data)
 
     def test_procedure_form_has_wrong_date(self):
-        workers_set = get_user_model().objects.filter(username__icontains="test")
+        workers_set = (
+            get_user_model().objects.filter(username__icontains="test")
+        )
         self.procedure_form_data = {
             "procedure_type": self.procedure_type,
             "client": self.client__,
-            "date_time": datetime(2022, 12, 9, 14, 0, tzinfo=zoneinfo.ZoneInfo(key='UTC')),
+            "date_time": (
+                datetime(2022, 12, 9, 14, 0,
+                         tzinfo=zoneinfo.ZoneInfo(key="UTC"))
+            ),
             "is_completed": False,
             "workers": workers_set
         }
         form = ProcedureForm(data=self.procedure_form_data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['date_time'][0], "The date and time cannot be in the past")
+        self.assertEqual(
+            form.errors["date_time"][0],
+            "The date and time cannot be in the past"
+        )

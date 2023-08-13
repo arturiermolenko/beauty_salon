@@ -60,7 +60,9 @@ class ProcedureListView(LoginRequiredMixin, generic.ListView):
 
         if form.is_valid():
             return queryset.filter(
-                procedure_type__name__icontains=form.cleaned_data["procedure_type"]
+                procedure_type__name__icontains=(
+                    form.cleaned_data["procedure_type"]
+                )
             )
 
         return queryset
