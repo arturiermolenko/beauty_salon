@@ -48,3 +48,8 @@ With this application it will be easy to:
 - Project homepage: ""ToDo - add after deploy""
 - Repository: https://github.com/arturiermolenko/beauty_salon
 - Author's GitHub page: https://github.com/arturiermolenko/
+
+## Demo User credentials
+Use next user credentials for the test entry
+- Login: admin
+- Password: a1d1m1i1n1
