@@ -2,7 +2,7 @@
 This app will help with beauty salon management - to create, to update or to delete Workers, Clients and the Procedures
 with a simple and intuitive interface.
 
-
+[Beauty salon project deployed to Render](https://beauty-salon-k4ys.onrender.com)
 
 
 # The applicatios has following database structure:
