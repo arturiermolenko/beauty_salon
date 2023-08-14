@@ -1,7 +1,6 @@
 from django.urls import path
 
 from salon.views import (
-    index,
     ProcedureListView,
     ProcedureCreateView,
     ProcedureUpdateView,
@@ -15,11 +14,11 @@ from salon.views import (
     WorkerCreateView,
     WorkerDetailView,
     WorkerUpdateView,
-    WorkerDeleteView
+    WorkerDeleteView, IndexView
 )
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path("procedures/", ProcedureListView.as_view(), name="procedure-list"),
     path(
         "procedures/create/",
