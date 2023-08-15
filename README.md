@@ -45,7 +45,7 @@ With this application it will be easy to:
 
 ## Links
 
-- Project homepage: ""ToDo - add after deploy""
+- Projects homepage: https://beauty-salon-k4ys.onrender.com
 - Repository: https://github.com/arturiermolenko/beauty_salon
 - Author's GitHub page: https://github.com/arturiermolenko/
 
