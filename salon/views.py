@@ -15,23 +15,24 @@ from salon.forms import (
 from salon.models import Client, Worker, Procedure
 
 
-def index(request):
-    """View function for the home page of the site."""
-    num_clients = Client.objects.count()
-    num_workers = Worker.objects.count()
-    num_procedures = Procedure.objects.count()
+class IndexView(generic.TemplateView):
+    template_name = "salon/index.html"
 
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        num_clients = Client.objects.count()
+        num_workers = Worker.objects.count()
+        num_procedures = Procedure.objects.count()
 
-    context = {
-        "num_clients": num_clients,
-        "num_workers": num_workers,
-        "num_procedures": num_procedures,
-        "num_visits": num_visits + 1,
-    }
+        num_visits = self.request.session.get("num_visits", 0)
+        self.request.session["num_visits"] = num_visits + 1
 
-    return render(request, "salon/index.html", context=context)
+        context["num_clients"] = num_clients
+        context["num_workers"] = num_workers
+        context["num_procedures"] = num_procedures
+        context["num_visits"] = num_visits + 1
+
+        return context
 
 
 class ProcedureListView(LoginRequiredMixin, generic.ListView):
